@@ -6,8 +6,6 @@ use App\Shared\Infrastructure\Controller\ApiController;
 use App\UrlShortener\Application\Command\CreateLinkCommand;
 use App\UrlShortener\Application\DTO\LinkInputCollectionDTO;
 use App\UrlShortener\Application\DTO\LinkInputDTO;
-use App\UrlShortener\Application\DTO\LinkOutputDTO;
-use App\UrlShortener\Domain\Entity\Link;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
