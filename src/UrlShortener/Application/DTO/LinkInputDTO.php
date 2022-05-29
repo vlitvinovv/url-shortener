@@ -4,7 +4,7 @@ namespace App\UrlShortener\Application\DTO;
 
 class LinkInputDTO
 {
-    public function __construct(public readonly string $longUrl, public readonly ?string $title)
+    public function __construct(public readonly string $longUrl, public readonly ?string $title, public readonly ?array $tags)
     {
     }
 }
