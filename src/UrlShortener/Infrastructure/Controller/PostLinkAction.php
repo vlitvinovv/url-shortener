@@ -21,11 +21,11 @@ class PostLinkAction extends ApiController
         $urlCollection = new LinkInputCollectionDTO();
         if (is_array($content)) {
             foreach ($content as $item) {
-                $url = new LinkInputDTO($item->long_url, $item->title ?? null);
+                $url = new LinkInputDTO($item->long_url, $item->title ?? null, $content->tags ?? null);
                 $urlCollection->add($url);
             }
         } else {
-            $urlCollection->add(new LinkInputDTO($content->long_url, $content->title ?? null));
+            $urlCollection->add(new LinkInputDTO($content->long_url, $content->title ?? null, $content->tags ?? null));
         }
 
         $results = $this->dispatch(

@@ -3,6 +3,8 @@
 namespace App\UrlShortener\Domain\Entity;
 
 use App\UrlShortener\Infrastructure\Repository\LinkRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LinkRepository::class)]
@@ -22,12 +24,20 @@ class Link
     #[ORM\Column(type: 'string', length: 255)]
     private $hash;
 
+    #[ORM\ManyToMany(targetEntity: Tag::class)]
+    #[ORM\JoinTable(name: 'links_tags')]
+    #[ORM\JoinColumn(name: "link_ulid", referencedColumnName: "ulid")]
+    #[ORM\InverseJoinColumn(name: "tag_ulid", referencedColumnName: "ulid")]
+    private $tags;
+
     public function __construct(string $ulid, string $longUrl, string $hash, ?string $title)
     {
         $this->ulid = $ulid;
         $this->longUrl = $longUrl;
         $this->hash = $hash;
         $this->title = $title;
+
+        $this->tags = new ArrayCollection();
     }
 
     public function getUlid(): string
@@ -48,5 +58,26 @@ class Link
     public function getHash(): string
     {
         return $this->hash;
+    }
+
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        $this->tags->removeElement($tag);
+
+        return $this;
     }
 }
