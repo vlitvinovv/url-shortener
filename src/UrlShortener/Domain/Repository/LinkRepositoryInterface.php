@@ -8,5 +8,7 @@ interface LinkRepositoryInterface
 {
     public function add(Link $link, bool $flush = false): void;
 
+    public function remove(Link $entity, bool $flush = false): void;
+
     public function findUrlByHash(string $hash): ?string;
 }
