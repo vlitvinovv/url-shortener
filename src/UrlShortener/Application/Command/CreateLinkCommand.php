@@ -7,7 +7,7 @@ use App\UrlShortener\Application\DTO\LinkInputCollectionDTO;
 
 class CreateLinkCommand implements CommandInterface
 {
-    public function __construct(public readonly LinkInputCollectionDTO $linkInputCollectionDTO)
+    public function __construct(public readonly array $linkInputDTOs)
     {
     }
 }
