@@ -7,25 +7,25 @@ DC=docker-compose -f ./docker/docker-compose.yml
 EXEC=$(DC) exec --user=www-data $(CONTAINER)
 
 build:
-	docker-compose -f ./docker/docker-compose.yml build
+	$(DC) build
 
 start:
-	docker-compose -f ./docker/docker-compose.yml start
+	$(DC) start
 
 stop:
-	docker-compose -f ./docker/docker-compose.yml stop
+	$(DC) stop
 
 up:
-	docker-compose -f ./docker/docker-compose.yml up -d --remove-orphans
+	$(DC) up -d --remove-orphans
 
 ps:
-	docker-compose -f ./docker/docker-compose.yml ps
+	$(DC) ps
 
 logs:
-	docker-compose -f ./docker/docker-compose.yml logs -f
+	$(DC) logs -f
 
 down:
-	docker-compose -f ./docker/docker-compose.yml down -v --rmi=all --remove-orphans
+	$(DC) down -v --rmi=all --remove-orphans
 
 
 ##################
@@ -33,22 +33,22 @@ down:
 ##################
 
 bash:
-	docker-compose -f ./docker/docker-compose.yml exec -u www-data php-fpm bash
+	$(EXEC) bash
 
 
 ##################
 # Database
 ##################
 db_create:
-	docker-compose -f ./docker/docker-compose.yml exec -u www-data php-fpm bin/console doctrine:database:create
+	$(EXEC) $(CONSOLE) doctrine:database:create
 
 db_drop:
-	docker-compose -f ./docker/docker-compose.yml exec -u www-data php-fpm bin/console doctrine:database:drop --force
+	$(EXEC) $(CONSOLE) doctrine:database:drop --force
 
 db_migrate:
-	docker-compose -f ./docker/docker-compose.yml exec -u www-data php-fpm bin/console doctrine:migrations:migrate --no-interaction
+	$(EXEC) $(CONSOLE) doctrine:migrations:migrate --no-interaction
 db_diff:
-	docker-compose -f ./docker/docker-compose.yml exec -u www-data php-fpm bin/console doctrine:migrations:diff --no-interaction
+	$(EXEC) $(CONSOLE) doctrine:migrations:diff --no-interaction
 
 
 ##################

@@ -5,13 +5,11 @@ namespace App\UrlShortener\Infrastructure\Controller;
 use App\Shared\Application\Exception\ValidationException;
 use App\Shared\Infrastructure\Controller\ApiController;
 use App\UrlShortener\Application\Command\CreateLinkCommand;
-use App\UrlShortener\Application\DTO\LinkInputCollectionDTO;
 use App\UrlShortener\Application\DTO\LinkInputDTO;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
