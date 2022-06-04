@@ -213,6 +213,12 @@
     "symfony/polyfill-uuid": {
         "version": "v1.25.0"
     },
+    "symfony/property-access": {
+        "version": "v6.1.0"
+    },
+    "symfony/property-info": {
+        "version": "v6.1.0"
+    },
     "symfony/proxy-manager-bridge": {
         "version": "v6.1.0"
     },
@@ -232,6 +238,9 @@
     "symfony/runtime": {
         "version": "v6.1.0"
     },
+    "symfony/serializer": {
+        "version": "v6.1.0"
+    },
     "symfony/service-contracts": {
         "version": "v3.1.0"
     },
@@ -241,8 +250,23 @@
     "symfony/string": {
         "version": "v6.1.0"
     },
+    "symfony/translation-contracts": {
+        "version": "v3.1.0"
+    },
     "symfony/uid": {
         "version": "v6.1.0"
+    },
+    "symfony/validator": {
+        "version": "6.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.3",
+            "ref": "c32cfd98f714894c4f128bb99aa2530c1227603c"
+        },
+        "files": [
+            "config/packages/validator.yaml"
+        ]
     },
     "symfony/var-dumper": {
         "version": "v6.1.0"

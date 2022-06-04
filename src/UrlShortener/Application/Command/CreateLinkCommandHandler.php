@@ -25,7 +25,7 @@ class CreateLinkCommandHandler implements CommandHandlerInterface
 
     public function __invoke(CreateLinkCommand $command): array
     {
-        $linkInputs = $command->linkInputCollectionDTO->getAll();
+        $linkInputs = $command->linkInputDTOs;
 
         $linksOutput = [];
         /** @var LinkInputDTO $linkInput */
