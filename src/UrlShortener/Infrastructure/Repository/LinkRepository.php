@@ -2,45 +2,32 @@
 
 namespace App\UrlShortener\Infrastructure\Repository;
 
+use App\Shared\Infrastructure\Repository\AbstractRepository;
 use App\UrlShortener\Domain\Entity\Link;
 use App\UrlShortener\Domain\Repository\LinkRepositoryInterface;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 
-class LinkRepository extends ServiceEntityRepository implements LinkRepositoryInterface
+class LinkRepository extends AbstractRepository implements LinkRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Link::class);
     }
 
-    public function add(Link $entity, bool $flush = false): void
+    public function findByUlid(string $ulid): ?Link
     {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        return $this->findOneBy(['ulid' => $ulid]);
     }
 
-    public function remove(Link $entity, bool $flush = false): void
-    {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
-    }
-
-    public function findUrlByHash(string $hash): ?string
+    public function findLongUrlByPath(string $path): ?string
     {
         $qb = $this->createQueryBuilder('l');
         $qb
             ->select('l.longUrl')
-            ->where($qb->expr()->eq('l.hash', ':hash'))
-            ->setParameter('hash', $hash);
+            ->where($qb->expr()->eq('l.path', ':path'))
+            ->setParameter('path', $path);
 
         try {
             return $qb->getQuery()->getSingleScalarResult();

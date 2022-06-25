@@ -15,12 +15,10 @@ class GetLinkByUlidQueryHandler implements QueryHandlerInterface
 
     public function __invoke(GetLinkByUlidQuery $query): ?LinkOutputDTO
     {
-        $link = $this->linkRepository->findOneBy(['ulid' => $query->ulid]);
+        $link = $this->linkRepository->findByUlid($query->ulid);
 
-        if (is_null($link)) {
-            return null;
-        }
-
-        return LinkOutputDTO::fromLink($this->urlShortener->getShortUrlByHash($link->getHash()), $link);
+        return $link !== null ?
+            LinkOutputDTO::fromLink($this->urlShortener->getShortUrlByPath($link->getPath()), $link) :
+            null;
     }
 }

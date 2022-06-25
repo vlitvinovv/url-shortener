@@ -16,18 +16,18 @@ class UrlShortenerService implements UrlShortenerServiceInterface
     {
     }
 
-    public function createHash(): string
+    public function createShortPath(): string
     {
         do {
             $hash = $this->randomStringGeneratorGenerator->generate(8);
-            $existingLink = $this->linkRepository->findOneBy(['hash' => $hash]);
+            $existingLink = $this->linkRepository->findOneBy(['path' => $hash]);
         } while($existingLink !== null);
 
         return $hash;
     }
 
-    public function getShortUrlByHash(string $hash): string
+    public function getShortUrlByPath(string $path): string
     {
-        return $this->router->generate('url_by_hash', ['hash' => $hash], UrlGeneratorInterface::ABSOLUTE_URL);
+        return $this->router->generate('long_url_by_path', ['path' => $path], UrlGeneratorInterface::ABSOLUTE_URL);
     }
 }

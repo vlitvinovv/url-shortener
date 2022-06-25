@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class GetLinkByUlidAction extends ApiController
 {
     #[Route('/links/{ulid}', name: "get_link", methods: ['GET'])]
-    public function __invoke(string $ulid)
+    public function __invoke(string $ulid): JsonResponse
     {
         $linkOutputDTO = $this->ask(
             new GetLinkByUlidQuery(
@@ -24,6 +24,6 @@ class GetLinkByUlidAction extends ApiController
         }
 
 
-        return new JsonResponse($linkOutputDTO);
+        return new JsonResponse($this->serialize($linkOutputDTO), Response::HTTP_OK, [], true);
     }
 }

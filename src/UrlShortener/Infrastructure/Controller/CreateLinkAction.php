@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class CreateLinkAction extends ApiController
 {
     #[Route('/links', methods: ['POST'])]
-    public function __invoke(Request $request, ValidatorInterface $validator, SerializerInterface $serializer)
+    public function __invoke(Request $request, ValidatorInterface $validator, SerializerInterface $serializer): JsonResponse
     {
         $content = json_decode($request->getContent());
 
@@ -43,6 +43,6 @@ class CreateLinkAction extends ApiController
 
         $responseBody = count($results) > 1 ? $results : $results[0];
 
-        return new JsonResponse($responseBody, Response::HTTP_CREATED);
+        return new JsonResponse($this->serialize($responseBody), Response::HTTP_CREATED, [], true);
     }
 }

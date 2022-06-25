@@ -14,6 +14,9 @@ COPY ./docker/php-fpm/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 # Postgres
 RUN apk add --no-cache libpq-dev && docker-php-ext-install pdo_pgsql
 
+#Socets
+RUN docker-php-ext-install sockets
+
 # Configure non-root user.
 ARG PUID=1000
 ARG PGID=1000
