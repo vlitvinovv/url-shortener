@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DeleteLinkByUlidAction extends ApiController
 {
     #[Route('/links/{ulid}', name: "delete_link", methods: ['DELETE'])]
-    public function __invoke(string $ulid)
+    public function __invoke(string $ulid): JsonResponse
     {
         $result = $this->dispatch(
             new DeleteLinkByUlidCommand(

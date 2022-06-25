@@ -20,6 +20,11 @@ doctrine:
                 dir: '%kernel.project_dir%/src/UrlShortener/Domain/Entity'
                 prefix: 'App\UrlShortener\Domain\Entity'
                 alias: App
+            Analytic:
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Analytic/Domain/Entity'
+                prefix: 'App\Analytic\Domain\Entity'
+                alias: App
 
 when@test:
     doctrine:

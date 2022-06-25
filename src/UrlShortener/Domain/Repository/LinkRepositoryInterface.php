@@ -6,9 +6,7 @@ use App\UrlShortener\Domain\Entity\Link;
 
 interface LinkRepositoryInterface
 {
-    public function add(Link $link, bool $flush = false): void;
+    public function findByUlid(string $ulid): ?Link;
 
-    public function remove(Link $entity, bool $flush = false): void;
-
-    public function findUrlByHash(string $hash): ?string;
+    public function findLongUrlByPath(string $path): ?string;
 }

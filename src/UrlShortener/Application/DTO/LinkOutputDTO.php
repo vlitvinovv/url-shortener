@@ -4,19 +4,33 @@ namespace App\UrlShortener\Application\DTO;
 
 use App\UrlShortener\Domain\Entity\Link;
 use App\UrlShortener\Domain\Entity\Tag;
-use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 class LinkOutputDTO
 {
+    public readonly string $ulid;
+
+    #[SerializedName("long_url")]
+    public readonly string $longUrl;
+
+    #[SerializedName("short_url")]
+    public readonly string $shortUrl;
+
+    public readonly ?string $title;
+
     public readonly array $tags;
 
     public function __construct(
-        public readonly string $ulid,
-        public readonly string $longUrl,
-        public readonly string $shortUrl,
-        public readonly ?string $title
+        string $ulid,
+        string $longUrl,
+        string $shortUrl,
+        ?string $title
     )
     {
+        $this->ulid = $ulid;
+        $this->longUrl = $longUrl;
+        $this->shortUrl = $shortUrl;
+        $this->title = $title;
     }
 
     public static function fromLink(string $shortUrl, Link $link): self

@@ -5,3 +5,7 @@ controllers:
 url_shortener:
     resource: ../src/UrlShortener/Infrastructure/Controller/
     type: annotation
+
+analytic:
+    resource: ../src/Analytic/Infrastructure/Controller/
+    type: annotation

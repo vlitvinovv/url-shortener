@@ -30,7 +30,7 @@ class CreateLinkCommandHandler implements CommandHandlerInterface
         $linksOutput = [];
         /** @var LinkInputDTO $linkInput */
         foreach ($linkInputs as $linkInput) {
-            $hash = $this->urlShortener->createHash();
+            $hash = $this->urlShortener->createShortPath();
 
             $link = new Link(
                 Ulid::generate(),
@@ -52,7 +52,7 @@ class CreateLinkCommandHandler implements CommandHandlerInterface
                 }
             }
 
-            $linksOutput[] = LinkOutputDTO::fromLink($this->urlShortener->getShortUrlByHash($link->getHash()), $link);
+            $linksOutput[] = LinkOutputDTO::fromLink($this->urlShortener->getShortUrlByPath($link->getPath()), $link);
 
             $this->linkRepository->add($link);
         }

@@ -20,7 +20,7 @@ final class Version20220529135413 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE link (ulid VARCHAR(26) NOT NULL, long_url VARCHAR(255) NOT NULL, title VARCHAR(255) DEFAULT NULL, hash VARCHAR(255) NOT NULL, PRIMARY KEY(ulid))');
+        $this->addSql('CREATE TABLE link (ulid VARCHAR(26) NOT NULL, long_url VARCHAR(255) NOT NULL, title VARCHAR(255) DEFAULT NULL, path VARCHAR(255) NOT NULL, PRIMARY KEY(ulid))');
     }
 
     public function down(Schema $schema): void

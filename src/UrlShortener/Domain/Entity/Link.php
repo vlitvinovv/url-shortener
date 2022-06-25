@@ -22,7 +22,7 @@ class Link
     private $title;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $hash;
+    private $path;
 
     #[ORM\ManyToMany(targetEntity: Tag::class)]
     #[ORM\JoinTable(name: 'links_tags')]
@@ -30,11 +30,11 @@ class Link
     #[ORM\InverseJoinColumn(name: "tag_ulid", referencedColumnName: "ulid")]
     private $tags;
 
-    public function __construct(string $ulid, string $longUrl, string $hash, ?string $title)
+    public function __construct(string $ulid, string $longUrl, string $path, ?string $title)
     {
         $this->ulid = $ulid;
         $this->longUrl = $longUrl;
-        $this->hash = $hash;
+        $this->path = $path;
         $this->title = $title;
 
         $this->tags = new ArrayCollection();
@@ -55,9 +55,9 @@ class Link
         return $this->title;
     }
 
-    public function getHash(): string
+    public function getPath(): string
     {
-        return $this->hash;
+        return $this->path;
     }
 
     public function getTags(): Collection

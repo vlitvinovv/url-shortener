@@ -4,7 +4,7 @@ namespace App\UrlShortener\Domain\Service;
 
 interface UrlShortenerServiceInterface
 {
-    public function createHash(): string;
+    public function createShortPath(): string;
 
-    public function getShortUrlByHash(string $hash): string;
+    public function getShortUrlByPath(string $path): string;
 }
